@@ -1,0 +1,15 @@
+venv/
+.venv/
+env/
+.env
+
+*.pem
+*.key
+
+__pycache__/
+*.pyc
+
+EVTX-ATTACK-SAMPLES/
+data/
+*.evtx
+*.csv
