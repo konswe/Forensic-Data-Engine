@@ -1,0 +1,6 @@
+python-evtx
+xmltodict
+pandas
+sqlalchemy
+psycopg2-binary
+python-dotenv
