@@ -23,13 +23,13 @@ Deploy the database engine on the remote server using the provided configuration
 
 ### 2. Local Environment (ETL Pipeline)
 Configure the local environment located in the /src directory:
-- Installation: pip install -r requirements.txt
+- Installation: pip install -r requirements-etl.txt
 - Execution: python load.py (Note: Ensure the SSH tunnel to the Azure VM is active)
 
 ### 3. Analytics Interface
 Run the dashboard on the server to access the analytical interface:
 - Location: /dashboard
-- Installation: pip install -r requirements.txt
+- Installation: pip install -r requirements-dashboard.txt
 - Execution: streamlit run dashboard.py
 
 ## Functional Capabilities
