@@ -3,6 +3,20 @@
 ## Overview
 Forensic Data Engine is a professional-grade ETL (Extract, Transform, Load) pipeline designed for the automated processing and analysis of Windows Event Logs (.evtx). The system enables security analysts to ingest large batches of forensic samples, parse them into a relational structure, and perform threat hunting through an interactive dashboard.
 
+## Technical Stack
+- Programming Language: Python 3
+- Data Processing: Pandas, python-evtx, xmltodict
+- Database Management: PostgreSQL, Docker, SQLAlchemy
+- Visualization: Streamlit
+- Security: SSH Tunneling, .gitignore credential management, python-dotenv
+
+## Dashboard Preview
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/f5ffe61e-2f68-4cd4-922e-fa0e3f79b384" width="90%" alt="Detailed Logs View" />
+  <br>
+  <em>Figure 1: Detailed event view with source attribution and timestamp normalization.</em>
+</p>
+
 ## System Architecture
 The project utilizes a hybrid architecture designed for security and scalability:
 
@@ -15,36 +29,76 @@ The project utilizes a hybrid architecture designed for security and scalability
    - Database: A containerized PostgreSQL instance for persistent storage of security events.
    - Frontend: A Streamlit-based web application providing real-time data visualization and filtering capabilities.
 
+## Functional Capabilities
+
+### Interactive Analysis
+The system provides a structured workflow for analyzing Windows Event Logs through a multi-layered filtering approach.
+
+<table>
+  <thead>
+    <tr>
+      <th width="70%">Feature Details</th>
+      <th width="30%">UI Preview</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <strong>Data Ingestion</strong><br>
+        Processes all event records from provided .evtx files without pre-filtering, ensuring a complete dataset is available for analysis.
+      </td>
+      <td rowspan="4" align="center" valign="middle">
+        <img src="https://github.com/user-attachments/assets/488b08b8-cbef-4248-88e1-c3aa4299e377" width="280" alt="Threat Filters" />
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>Relational Storage</strong><br>
+        Converts unstructured XML event data into a queryable PostgreSQL database via SQLAlchemy.
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>Contextual Mapping</strong><br>
+        Every record is tagged with its original filename to maintain context during multi-file analysis.
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>Visual Distribution</strong><br>
+        Immediate visualization of Event ID frequency to spot anomalies like log clearing or mass logons.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+---
+
+### Visual Insights
+The analytical dashboard provides a high-level overview of the ingested forensic samples, highlighting anomalies across the entire dataset.
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/407d334f-3012-4139-a166-2bf5c0bf0cda" width="95%" alt="Event Distribution Chart" />
+  <br>
+  <em>Figure 2: Statistical distribution of identified Event IDs across the selected timeframe.</em>
+</p>
+
 ## Deployment Instructions
 
 ### 1. Remote Infrastructure (Azure)
 Deploy the database engine on the remote server using the provided configuration:
-- Command: docker-compose up -d
+- Command: `docker-compose up -d`
 
 ### 2. Local Environment (ETL Pipeline)
 Configure the local environment located in the /src directory:
-- Installation: pip install -r requirements-etl.txt
-- Execution: python load.py (Note: Ensure the SSH tunnel to the Azure VM is active)
+- Installation: `pip install -r requirements-etl.txt`
+- Execution: `python load.py` (Note: Ensure the SSH tunnel to the Azure VM is active)
 
 ### 3. Analytics Interface
 Run the dashboard on the server to access the analytical interface:
 - Location: /dashboard
-- Installation: pip install -r requirements-dashboard.txt
-- Execution: streamlit run dashboard.py
-
-## Functional Capabilities
-The system provides a structured workflow for analyzing Windows Event Logs:
-- Data Ingestion: Processes all event records from provided .evtx files, ensuring a complete dataset is available for analysis.
-- Relational Storage: Converts unstructured XML event data into a queryable PostgreSQL database.
-- Interactive Analysis: The dashboard allows users to filter the entire dataset by Computer Name, Event ID, and Source File.
-- Contextual Mapping: Every record is tagged with its original filename to maintain context during multi-file analysis.
-
-## Technical Stack
-- Programming Language: Python 3
-- Data Processing: Pandas, python-evtx, xmltodict
-- Database Management: PostgreSQL, Docker, SQLAlchemy
-- Visualization: Streamlit
-- Security: SSH Tunneling, .gitignore credential management
+- Installation: `pip install -r requirements-dashboard.txt`
+- Execution: `streamlit run dashboard.py`
 
 ## Acknowledgments & Data Source
 The sample EVTX files used to build, test, and demonstrate this pipeline were sourced from the community repository created by Samir Bousseaden:
