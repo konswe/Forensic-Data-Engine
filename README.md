@@ -91,8 +91,9 @@ Deploy the database engine on the remote server using the provided configuration
 
 ### 2. Local Environment (ETL Pipeline)
 Configure the local environment located in the `/src` directory to ingest logs:
-- Installation: `pip install -r requirements-etl.txt`
-- Execution: `python load.py`
+- **Installation**: `pip install -r requirements-etl.txt`
+- **Configuration**: Open `load.py` and update the `target_dir` variable with the path to your source `.evtx` files (e.g., `target_dir = "C:/Logs/InvestigatedCase"`).
+- **Execution**: `python load.py`
 - **SSH Tunnel (Data Ingestion):** An active SSH tunnel to the Azure VM forwarding **Port 5432** is required. This enables the local Python environment to securely communicate with the isolated PostgreSQL container.
 
 ### 3. Analytics Interface
