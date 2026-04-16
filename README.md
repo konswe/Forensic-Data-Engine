@@ -90,15 +90,17 @@ Deploy the database engine on the remote server using the provided configuration
 - Command: `docker-compose up -d`
 
 ### 2. Local Environment (ETL Pipeline)
-Configure the local environment located in the /src directory:
+Configure the local environment located in the `/src` directory to ingest logs:
 - Installation: `pip install -r requirements-etl.txt`
-- Execution: `python load.py` (Note: Ensure the SSH tunnel to the Azure VM is active)
+- Execution: `python load.py`
+- **SSH Tunnel (Data Ingestion):** An active SSH tunnel to the Azure VM forwarding **Port 5432** is required. This enables the local Python environment to securely communicate with the isolated PostgreSQL container.
 
 ### 3. Analytics Interface
-Run the dashboard on the server to access the analytical interface:
-- Location: /dashboard
+Deploy the analytical interface on the remote server to enable real-time visualization:
+- Location: `/dashboard`
 - Installation: `pip install -r requirements-dashboard.txt`
 - Execution: `streamlit run dashboard.py`
+- **SSH Tunnel (UI Access):** To access the dashboard locally, establish an SSH tunnel forwarding **Port 8501** (e.g., `ssh -L 8501:localhost:8501 user@azure-ip`). This allows you to interact with the engine via `http://localhost:8501` in your browser while keeping the server's ports closed to the public internet.
 
 ## Acknowledgments & Data Source
 The sample EVTX files used to build, test, and demonstrate this pipeline were sourced from the community repository created by Samir Bousseaden:
